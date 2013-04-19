@@ -1,0 +1,29 @@
+{
+  "name": "messenger",
+  "title": "messenger.js",
+  "description": "Simple SendMessage like messenger",
+  "version": "0.0.1",
+  "homepage": "",
+  "author": {
+    "name": "kei takahashi(twitter@dameleon)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dameleon/messenger.js"
+  },
+  "bugs": {
+    "url": "https://github.com/dameleon/messenger.js/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "dependencies": {},
+  "devDependencies": {
+  },
+  "keywords": [],
+  "scripts": {
+    "preinstall": "npm i -g grunt-cli buster"
+  }
+}
