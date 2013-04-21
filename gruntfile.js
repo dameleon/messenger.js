@@ -18,7 +18,7 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            all: 'src/*.js',
+            all: './messenger.js',
             options: {
                 curly: true,
                 eqnull: true,

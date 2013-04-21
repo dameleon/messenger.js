@@ -1,4 +1,3 @@
-// プラグイン名変えたら色々と書きなおす必要がありますよっと
 buster.testCase("tt.js test", {
     "setUp": function() {
         this.msgr = new Msgr();
@@ -16,11 +15,15 @@ buster.testCase("tt.js test", {
         }
     },
     "send on test": function() {
-        var spy = sinon.spy();
+        var dfd = when.defer();
 
-        this.msgr.on("hoge", spy)
+        this.msgr.on("hoge", function() {
+            assert(true);
+            dfd.resolver.resolve();
+        });
         this.msgr.send("hoge");
-        assert.calledOnce(spy);
+
+        return dfd.promise;
     },
     "send off test": function() {
         var spy = sinon.spy();
@@ -57,5 +60,13 @@ buster.testCase("tt.js test", {
 
         this.msgr.clear("hoge");
         assert.equals(this.msgr.list("hoge").length, 0);
+    },
+    "reset test": function() {
+        this.msgr.on("hoge", function() {});
+        this.msgr.on("fuga", function() {});
+        this.msgr.on("piyo", function() {});
+
+        this.msgr.reset();
+        assert.equals(Object.keys(this.msgr.list()).length, 0);
     }
 });

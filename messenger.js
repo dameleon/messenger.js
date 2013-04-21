@@ -13,44 +13,48 @@ Messenger.prototype = {
 	send: function() {
 		var args = [].slice.call(arguments),
 			key = args.shift(),
-			ary = callbacks[key];
+			list = _getCallbackList(key);
 
-		if (!ary) {
+		if (!list.length) {
 			return;
 		}
 		setTimeout(function() {
-			ary.forEach(function(fn) {
+			list.forEach(function(fn) {
+                global.console.log(fn);
 				fn.apply(null, args);
 			});
 		});
 	},
 	on: function(key, fn) {
-		if (!callbacks[key]) {
-			callbacks[key] = [];
-		}
-		callbacks[key].push(fn);
+        var list = _getCallbackList(key);
+
+		list.push(fn);
 	},
 	off: function(key, fn) {
-		if (!callbacks[key]) {
-			return;
-		}
-		var ary = callbacks[key],
-			index = ary.indexOf(fn);
+		var list = _getCallbackList(key),
+			index = list.indexOf(fn);
 
 		if (index > -1) {
-			ary.splice(index, 1);
+			list.splice(index, 1);
 		}
 	},
 	list: function(key) {
-		return !key ? callbacks : (callbacks[key] || [])
+		return !key ? callbacks : _getCallbackList(key);
 	},
 	clear: function(key) {
 		if (!callbacks[key]) {
 			return;
 		}
 		delete callbacks[key];
-	}
+	},
+    reset: function() {
+        callbacks = {};
+    }
 };
+
+function _getCallbackList(key) {
+    return callbacks[key] || (callbacks[key] = []);
+}
 
 return Messenger;
 

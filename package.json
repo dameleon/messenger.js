@@ -2,7 +2,7 @@
   "name": "messenger",
   "title": "messenger.js",
   "description": "Simple SendMessage like messenger",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "",
   "author": {
     "name": "kei takahashi(twitter@dameleon)"
@@ -21,6 +21,10 @@
   ],
   "dependencies": {},
   "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-buster": "~0.1.2"
   },
   "keywords": [],
   "scripts": {
